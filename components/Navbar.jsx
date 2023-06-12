@@ -3,13 +3,16 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { useAuth } from '@/context/userAuthContext'
 
 const navigation = [
-    { name: 'MyProfile', href: '/' },
+    { name: 'MyProfile', href: '/my-profile' },
     { name: 'Create Prompt', href: '/create-prompt' },
 ]
 
 export default function Navbar() {
+    const { signInWithGoogle, user, setUser, userLogout } = useAuth()
+    console.log(user)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return (
         <>
@@ -26,7 +29,7 @@ export default function Navbar() {
                             />
                         </Link>
                     </div>
-                    <div className="flex lg:hidden">
+                    <div className="flex sm:hidden">
                         <button
                             type="button"
                             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -38,15 +41,20 @@ export default function Navbar() {
                     </div>
                     <div className="hidden lg:flex lg:gap-x-12">
                         {navigation.map((item) => (
-                            <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+                            <Link key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
                                 {item.name}
-                            </a>
+                            </Link>
                         ))}
                     </div>
-                    <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                    <div className="hidden sm:flex sm:flex-1 sm:justify-end">
+                        {user ? <div className="flex items-center space-x-2">
+                            <span className="text-sm font-semibold leading-6 text-gray-900">{user.name}</span>
+                            <button onClick={userLogout} className="text-sm font-semibold leading-6 text-gray-900">
+                                Logout
+                            </button>
+                        </div> : <button onClick={signInWithGoogle} className="text-sm font-semibold leading-6 text-gray-900">
                             Log in <span aria-hidden="true">&rarr;</span>
-                        </a>
+                        </button>}
                     </div>
                 </nav>
                 {/* Mobile Navigation Dropdown  */}
@@ -75,23 +83,27 @@ export default function Navbar() {
                             <div className="-my-6 divide-y divide-gray-500/10">
                                 <div className="space-y-2 py-6">
                                     {navigation.map((item) => (
-                                        <a
+                                        <Link
                                             key={item.name}
                                             href={item.href}
                                             className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                         >
                                             {item.name}
-                                        </a>
+                                        </Link>
                                     ))}
-                                    <Link
-                                        href="/"
-                                        onClick={() => {
-                                            setMobileMenuOpen(false)
-                                        }}
-                                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                    >
-                                        Log in
-                                    </Link>
+                                    {user ?
+                                        <><p className="text-sm font-semibold leading-6 text-gray-900">{user.name}</p><button onClick={userLogout} className="text-sm font-semibold leading-6 text-gray-900">
+                                            Logout
+                                        </button></>
+                                        : <Link
+                                            href="/"
+                                            onClick={() => {
+                                                setMobileMenuOpen(false)
+                                            }}
+                                            className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                        >
+                                            Log in
+                                        </Link>}
                                 </div>
                             </div>
                         </div>
