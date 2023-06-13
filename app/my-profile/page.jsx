@@ -33,6 +33,8 @@ export default function page() {
       }
     }
   };
+
+  
   return (
     <section className='mx-auto max-w-6xl py-16 px-6 md:px-0'>
       <h1 className='mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-left'>

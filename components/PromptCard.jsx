@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import Moment from "react-moment";
 
 export default function PromptCard({ index, $id, uid, tag, prompt, username, timestamp, handleTagClick, deletePrompt }) {
   const [copied, setCopied] = useState("");
@@ -10,7 +11,6 @@ export default function PromptCard({ index, $id, uid, tag, prompt, username, tim
     setCopied(prompt);
     setTimeout(() => setCopied(""), 3000);
   };
-
   return (
     <article className="flex max-w-xl flex-col items-start justify-between bg-white rounded-lg shadow-md border border-gray-200 p-4">
       <div className="flex justify-between w-full">
@@ -39,11 +39,11 @@ export default function PromptCard({ index, $id, uid, tag, prompt, username, tim
       </Link>
       {pathName === "/my-profile" && (
         <div className='mt-5 justify-between flex gap-4'>
-          <button 
+          <Link href={`/update-prompt?id=${$id}`}
             className='text-sm bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent cursor-pointer'
           >
             Edit
-          </button>
+          </Link>
           <button onClick={()=>{deletePrompt($id)}}
             className='text-sm  bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent cursor-pointer'
           >

@@ -2,7 +2,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function HeroSection({ handelSearchInput, search, setSearch}) {
     return (
-        <div className="relative isolate px-6 md:px-0 pt-14 pb-1.5">
+        <div className="relative isolate px-6 md:px-0 pt-6 pb-1.5">
             {/* Color Transition */}
             <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
                 <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style={{
@@ -33,7 +33,7 @@ export default function HeroSection({ handelSearchInput, search, setSearch}) {
                         AiPromptMaster is an open-source AI prompting tool for modern world to discover, create and share creative prompts.
                     </p>
                     {/* Searchbar */}
-                    <form className="relative w-full flex items-center">
+                    <form className="relative w-full flex items-center pt-8">
   <input
     type="text"
     value={search}

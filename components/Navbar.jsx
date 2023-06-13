@@ -95,15 +95,12 @@ export default function Navbar() {
                                         <><p className="text-sm font-semibold leading-6 text-gray-900">{user.name}</p><button onClick={userLogout} className="text-sm font-semibold leading-6 text-gray-900">
                                             Logout
                                         </button></>
-                                        : <Link
-                                            href="/"
-                                            onClick={() => {
-                                                setMobileMenuOpen(false)
-                                            }}
+                                        : <button
+                                            onClick={signInWithGoogle}
                                             className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                         >
                                             Log in
-                                        </Link>}
+                                        </button>}
                                 </div>
                             </div>
                         </div>
