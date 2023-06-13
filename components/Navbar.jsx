@@ -11,12 +11,12 @@ const navigation = [
 ]
 
 export default function Navbar() {
-    const { signInWithGoogle, user, setUser, userLogout } = useAuth()
+    const { signInWithGoogle, user, userLogout } = useAuth()
     console.log(user)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     return (
         <>
-            <header className="relative inset-x-0 top-0 z-50 max-w-6xl mx-auto px-6 md:px-0">
+            <header className="relative inset-x-0 top-0 z-50 max-w-6xl mx-auto px-6">
                 {/* Desktop Navigation */}
                 <nav className="flex items-center justify-between py-6" aria-label="Global">
                     <div className="flex lg:flex-1">
@@ -39,22 +39,25 @@ export default function Navbar() {
                             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                         </button>
                     </div>
-                    <div className="hidden lg:flex lg:gap-x-12">
+                  {user && <div className="hidden lg:flex lg:gap-x-12">
                         {navigation.map((item) => (
                             <Link key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
                                 {item.name}
                             </Link>
                         ))}
-                    </div>
+                    </div>}
                     <div className="hidden sm:flex sm:flex-1 sm:justify-end">
                         {user ? <div className="flex items-center space-x-2">
                             <span className="text-sm font-semibold leading-6 text-gray-900">{user.name}</span>
+                            <span className="text-sm font-semibold leading-6 text-gray-900">{user.email}</span>
                             <button onClick={userLogout} className="text-sm font-semibold leading-6 text-gray-900">
                                 Logout
                             </button>
-                        </div> : <button onClick={signInWithGoogle} className="text-sm font-semibold leading-6 text-gray-900">
+                        </div> : 
+                        <Link href="/login"  className="text-sm font-semibold leading-6 text-gray-900">
                             Log in <span aria-hidden="true">&rarr;</span>
-                        </button>}
+                        </Link>
+                        }
                     </div>
                 </nav>
                 {/* Mobile Navigation Dropdown  */}
@@ -81,23 +84,25 @@ export default function Navbar() {
                         </div>
                         <div className="mt-6 flow-root">
                             <div className="-my-6 divide-y divide-gray-500/10">
-                                <div className="space-y-2 py-6">
+                                <div className="space-y-4 py-16">
+                                   {user &&  <div className='space-y-4'>
                                     {navigation.map((item) => (
                                         <Link
                                             key={item.name}
                                             href={item.href}
-                                            className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                            className="text-center items-center justify-center rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 bg-gray-50 mx-auto pb-3 flex"
                                         >
                                             {item.name}
                                         </Link>
                                     ))}
+                                    </div>}
                                     {user ?
                                         <><p className="text-sm font-semibold leading-6 text-gray-900">{user.name}</p><button onClick={userLogout} className="text-sm font-semibold leading-6 text-gray-900">
                                             Logout
                                         </button></>
                                         : <button
                                             onClick={signInWithGoogle}
-                                            className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                            className="rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 bg-gray-50 text-center items-center justify-center w-full"
                                         >
                                             Log in
                                         </button>}

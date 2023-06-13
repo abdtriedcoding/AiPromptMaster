@@ -16,7 +16,6 @@ export default function Feed() {
     useEffect(() => {
         getFetchTodos()
     }, [])
-    console.log(prompts)
 
     const handelSearchInput = (e) => {
         setSearch(e.target.value)

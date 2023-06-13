@@ -11,7 +11,7 @@ export default function HeroSection({ handelSearchInput, search, setSearch}) {
                 }} />
             </div>
             {/* Content */}
-            <div className="mx-auto max-w-2xl py-20">
+            <div className="mx-auto max-w-2xl md:py-20">
                 <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                     <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                         Go give it a star on github.{' '}
@@ -45,13 +45,14 @@ export default function HeroSection({ handelSearchInput, search, setSearch}) {
   {search && (
     <button
       type="button"
-      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
-      onClick={() =>{setSearch("")}}
+      className="absolute right-2 top-1/2 pt-8 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+      onClick={() => setSearch("")}
     >
       <XMarkIcon className="w-6 h-6" />
     </button>
   )}
 </form>
+
 
 
                 </div>
