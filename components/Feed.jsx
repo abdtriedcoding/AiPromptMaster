@@ -34,10 +34,14 @@ export default function Feed() {
 
         return filteredPrompts;
     };
+    
+    const handleTagClick = (tagName) => {
+        setSearch(tagName);
+      };
 
     return (
         <>
-            <HeroSection handelSearchInput={handelSearchInput} search={search} />
+            <HeroSection handelSearchInput={handelSearchInput} search={search} setSearch={setSearch} />
             <div className="mx-auto max-w-6xl py-16 px-6 md:px-0">
                 {handleSearch()?.length === 0 ? (
                     <p className="text-gray-500 text-3xl font-bold text-center">No results found.</p>
@@ -53,6 +57,7 @@ export default function Feed() {
                                 prompt={e.prompt}
                                 username={e.username}
                                 timestamp={e.timestamp}
+                                handleTagClick={handleTagClick}
                             />
                         ))}
                     </div>

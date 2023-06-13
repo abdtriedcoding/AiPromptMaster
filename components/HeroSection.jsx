@@ -1,4 +1,6 @@
-export default function HeroSection({search , handelSearchInput}) {
+import { XMarkIcon } from "@heroicons/react/24/outline";
+
+export default function HeroSection({ handelSearchInput, search, setSearch}) {
     return (
         <div className="relative isolate px-6 md:px-0 pt-14 pb-1.5">
             {/* Color Transition */}
@@ -31,16 +33,27 @@ export default function HeroSection({search , handelSearchInput}) {
                         AiPromptMaster is an open-source AI prompting tool for modern world to discover, create and share creative prompts.
                     </p>
                     {/* Searchbar */}
-                    <form className='relative w-full flex-center pt-12'>
-                        <input
-                            type='text'
-                            value={search}
-                            onChange={handelSearchInput}
-                            placeholder='Search for a tag or a username'
-                            required
-                            className='block w-full rounded-md border border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0'
-                        />
-                    </form>
+                    <form className="relative w-full flex items-center">
+  <input
+    type="text"
+    value={search}
+    onChange={handelSearchInput}
+    placeholder="Search for a tag or a username"
+    required
+    className="block w-full rounded-md border border-gray-200 bg-white py-2.5 pr-10 pl-5 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0"
+  />
+  {search && (
+    <button
+      type="button"
+      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+      onClick={() =>{setSearch("")}}
+    >
+      <XMarkIcon className="w-6 h-6" />
+    </button>
+  )}
+</form>
+
+
                 </div>
             </div>
             {/* Color Transition */}

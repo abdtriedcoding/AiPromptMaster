@@ -1,6 +1,7 @@
 'use client'
 import PromptCard from "@/components/PromptCard";
 import { useAuth } from "@/context/userAuthContext";
+import { databases } from "@/lib/appwriteConfig";
 import { fetchPromptsByUserId } from "@/lib/crudOperations";
 import { useEffect, useState } from "react";
 
@@ -16,7 +17,22 @@ export default function page() {
   }
   useEffect(() => {
     getFetchTodos()
-  }, [])
+  }, [user])
+
+  const deletePrompt = async ($id) => {
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete this prompt?"
+    );
+    if (hasConfirmed) {
+      try {
+        await databases.deleteDocument('64882f652d5bd19b2990', '64882f87f0e782686a74', $id);
+        const filteredPosts = prompts?.documents?.filter((item) => item.$id !== $id);
+        setPrompts(filteredPosts)
+      } catch (error) {
+        alert(error.message)
+      }
+    }
+  };
   return (
     <section className='mx-auto max-w-6xl py-16 px-6 md:px-0'>
       <h1 className='mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-left'>
@@ -35,6 +51,7 @@ export default function page() {
               prompt={e.prompt}
               username={e.username}
               timestamp={e.timestamp}
+              deletePrompt={deletePrompt}
             />
           })}
         </div>
